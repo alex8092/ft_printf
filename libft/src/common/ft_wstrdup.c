@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_parse_upperllhexa.c                      :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amerle <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/28 06:19:28 by amerle            #+#    #+#             */
-/*   Updated: 2015/01/28 06:19:28 by amerle           ###   ########.fr       */
+/*   Created: 2014/05/02 05:34:29 by amerle            #+#    #+#             */
+/*   Updated: 2014/05/02 05:34:29 by amerle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_private.h"
+#include "ft_common.h"
+#include <stdlib.h>
+#include <stdint.h>
+#include <wchar.h>
 
-void	ft_printf_parse_upperllhexa(void)
+wchar_t	*ft_wstrdup(const wchar_t *s)
 {
-	static t_printf		*inst = 0;
+	wchar_t			*str;
+	const size_t	len = ft_wstrlen(s);
+	const size_t	size = (len + 1) * sizeof(wchar_t);
 
-	if (!inst)
-		inst = ft_printf_instance();
-	if (inst->out->v_precision == 0 && inst->out->v_zero_precision)
-		return ;
-	inst->out->v_upper = true;
-	ft_printf_add_hexa(va_arg(inst->args, long long), 2);
+	str = malloc(size);
+	return ((str) ? (wchar_t *)ft_memcpy(str, s, size) : NULL);
 }

@@ -24,6 +24,7 @@ SRCS = 	src/common/ft_atoi.c \
 		src/common/ft_findinarray.c \
 		src/common/ft_getnextline.c \
 		src/common/ft_isnum.c \
+		src/common/ft_isutf8.c \
 		src/common/ft_itoa.c \
 		src/common/ft_memalloc.c \
 		src/common/ft_memcpy.c \
@@ -46,6 +47,7 @@ SRCS = 	src/common/ft_atoi.c \
 		src/common/ft_strcmp.c \
 		src/common/ft_strcpy.c \
 		src/common/ft_strdup.c \
+		src/common/ft_wstrdup.c \
 		src/common/ft_strjoin.c \
 		src/common/ft_strlen.c \
 		src/common/ft_strncpy.c \

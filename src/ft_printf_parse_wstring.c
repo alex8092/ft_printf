@@ -26,9 +26,7 @@ void	ft_printf_parse_wstring(void)
 	{
 		size = ft_wstrlen(str);
 		if (inst->out->v_precision && size > inst->out->v_precision)
-			size = inst->out->v_precision;
-		size = size * sizeof(wchar_t) - size;
-		inst->minus_ret_size += size;
+			size = inst->out->v_precision * sizeof(wchar_t);
 		inst->out->addw(inst->out, str);
 	}
 	else

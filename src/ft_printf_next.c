@@ -16,13 +16,17 @@
 static void	ft_printf_next_is_arg(t_printf *inst, char *ptr)
 {
 	const char	*tmp;
+	int			i;
 
 	tmp = inst->str + inst->index;
 	inst->out->addn(inst->out, tmp, ptr - inst->str - inst->index);
-	if (*(ptr + 1) == '%')
+	i = 1;
+	while (*(ptr + i) == ' ')
+		++i;
+	if (*(ptr + i) == '%')
 	{
 		inst->out->addc(inst->out, '%');
-		inst->index = ptr - inst->str + 2;
+		inst->index = ptr - inst->str + i + 1;
 	}
 	else
 	{

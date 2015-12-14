@@ -31,4 +31,9 @@ void	ft_printf_get_size(void)
 			return ;
 		inst->out->v_min_field_width = size;
 	}
+	else if (inst->str[inst->index] == '*')
+	{
+		inst->out->v_min_field_width = va_arg(inst->args, int);
+		++inst->index;
+	}
 }

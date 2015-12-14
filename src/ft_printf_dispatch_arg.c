@@ -11,10 +11,30 @@
 /* ************************************************************************** */
 
 #include "ft_printf_private.h"
+#include "ft_sstream_private.h"
 #include "ft_common.h"
 
 static t_printf_opt		g_opts[] =
 {
+	{
+		"c", 1,
+		{
+			&ft_printf_parse_char,
+			&ft_printf_parse_wchar, 0, 0, 0, 0, 0
+		},
+	},
+	{
+		"%", 1,
+		{
+			&ft_printf_parse_percent, 0, 0, 0, 0, 0, 0
+		}
+	},
+	{
+		"C", 1,
+		{
+			&ft_printf_parse_wchar, 0, 0, 0, 0, 0, 0
+		}
+	},
 	{
 		"s", 1,
 		{
@@ -121,20 +141,7 @@ static t_printf_opt		g_opts[] =
 			&ft_printf_parse_upperhexa,
 			&ft_printf_parse_upperhexa,
 			&ft_printf_parse_upperintmaxhexa,
-			&ft_printf_parse_sizethexa
-		}
-	},
-	{
-		"c", 1,
-		{
-			&ft_printf_parse_char,
-			&ft_printf_parse_wchar, 0, 0, 0, 0, 0
-		}
-	},
-	{
-		"C", 1,
-		{
-			&ft_printf_parse_wchar, 0, 0, 0, 0, 0, 0
+			&ft_printf_parse_uppersizethexa
 		}
 	}
 };
@@ -188,10 +195,13 @@ static void		f_do2(t_printf *inst)
 				g_opts[i].parse[inst->type_modifier]();
 			else
 				g_opts[i].parse[0]();
+			ft_sstream_reset_modifiers(inst->out);
 			return ;
 		}
 		++i;
 	}
+	ft_printf_parse_char_nova(inst->str[inst->index]);
+	++inst->index;
 }
 
 void			ft_printf_dispatch_arg(void)
@@ -208,7 +218,6 @@ void			ft_printf_dispatch_arg(void)
 		last_index = inst->index;
 		f_do(inst);
 		f_do2(inst);
-		if (inst->index == last_index)
-			++inst->index;
+		break ;
 	}
 }

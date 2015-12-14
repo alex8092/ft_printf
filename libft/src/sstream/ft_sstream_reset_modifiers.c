@@ -15,6 +15,7 @@
 t_sstream	*ft_sstream_reset_modifiers(t_sstream *ss)
 {
 	ss->v_upper = false;
+	ss->v_zero_precision = false;
 	ss->v_alternate_form = false;
 	ss->v_min_field_width = 0;
 	ss->v_precision = 0;

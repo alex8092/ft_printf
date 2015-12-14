@@ -18,5 +18,13 @@ void	ft_printf_parse_octal(void)
 
 	if (!inst)
 		inst = ft_printf_instance();
-	inst->out->addo(inst->out, va_arg(inst->args, int));
+	if (inst->out->v_precision == 0 && inst->out->v_zero_precision && \
+		!ft_printf_has_flag('#'))
+		return ;
+	if (inst->type_modifier == TYPE_MODIF_HH)
+		inst->out->addo(inst->out, (unsigned char)va_arg(inst->args, int));
+	else if (inst->type_modifier == TYPE_MODIF_H)
+		inst->out->addo(inst->out, (unsigned short)va_arg(inst->args, int));
+	else
+		inst->out->addo(inst->out, (unsigned int)va_arg(inst->args, int));
 }

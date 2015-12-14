@@ -24,6 +24,7 @@ struct			s_sstream
 	t_string	*str;
 	t_bool		v_upper;
 	t_bool		v_alternate_form;
+	t_bool		v_zero_precision;
 	size_t		v_min_field_width;
 	size_t		v_precision;
 	char		v_char_fill;

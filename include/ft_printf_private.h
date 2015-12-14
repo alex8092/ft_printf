@@ -19,6 +19,9 @@
 # include "ft_string.h"
 # include "ft_sstream.h"
 
+# define TYPE_MODIF_HH			4
+# define TYPE_MODIF_H			3
+
 typedef struct s_printf			t_printf;
 typedef struct s_printf_opt		t_printf_opt;
 typedef struct s_printf_flag	t_printf_flag;
@@ -58,6 +61,7 @@ void			ft_printf_get_flags(void);
 t_bool			ft_printf_has_flag(char c);
 void			ft_printf_disable_flag(char c);
 void			ft_printf_reset_flags(void);
+void			ft_printf_parse_char_nova(char c);
 void			ft_printf_add_number(long long number);
 void			ft_printf_add_unumber(unsigned long long number);
 void			ft_printf_add_hexa(long long i, int func);
@@ -67,6 +71,7 @@ void			ft_printf_parse_sizet(void);
 void			ft_printf_parse_pointer(void);
 void			ft_printf_parse_intmax(void);
 void			ft_printf_parse_short(void);
+void			ft_printf_parse_percent(void);
 void			ft_printf_parse_int(void);
 void			ft_printf_parse_longint(void);
 void			ft_printf_parse_longlong(void);
@@ -89,6 +94,7 @@ void			ft_printf_parse_upperhexa(void);
 void			ft_printf_parse_upperlhexa(void);
 void			ft_printf_parse_upperllhexa(void);
 void			ft_printf_parse_upperintmaxhexa(void);
+void			ft_printf_parse_uppersizethexa(void);
 void			ft_printf_parse_sizethexa(void);
 void			ft_printf_parse_char(void);
 void			ft_printf_parse_wchar(void);

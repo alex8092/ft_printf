@@ -15,9 +15,18 @@
 void	ft_printf_parse_upperhexa(void)
 {
 	static t_printf		*inst = 0;
+	int					value;
 
 	if (!inst)
 		inst = ft_printf_instance();
+	if (inst->out->v_precision == 0 && inst->out->v_zero_precision)
+		return ;
 	inst->out->v_upper = true;
-	ft_printf_add_hexa(va_arg(inst->args, int), 0);
+	if (inst->type_modifier == TYPE_MODIF_HH)
+		value = (unsigned char)va_arg(inst->args, int);
+	else if (inst->type_modifier == TYPE_MODIF_H)
+		value = (unsigned short)va_arg(inst->args, int);
+	else
+		value = va_arg(inst->args, int);
+	ft_printf_add_hexa(value, 0);
 }

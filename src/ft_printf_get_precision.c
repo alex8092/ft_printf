@@ -13,10 +13,22 @@
 #include "ft_printf_private.h"
 #include "ft_common.h"
 
-void	ft_printf_get_precision(void)
+static long int		ft_printf_get_precision_2(t_printf *inst)
 {
-	static t_printf	*inst = 0;
 	long int		precision;
+
+	precision = ft_atoi(inst->str + inst->index);
+	if (precision < 0)
+		++inst->index;
+	while (ft_isnum(inst->str[inst->index]))
+		++inst->index;
+	return (precision);
+}
+
+void				ft_printf_get_precision(void)
+{
+	static t_printf		*inst = 0;
+	long int			precision;
 
 	if (!inst)
 		inst = ft_printf_instance();
@@ -26,17 +38,14 @@ void	ft_printf_get_precision(void)
 		if (inst->str[inst->index] == '*')
 			precision = va_arg(inst->args, int);
 		else
-		{
-			precision = ft_atoi(inst->str + inst->index);
-			if (precision < 0)
-				++inst->index;
-			while (ft_isnum(inst->str[inst->index]))
-				++inst->index;
-		}
+			precision = ft_printf_get_precision_2(inst);
 		if (precision >= 0)
 		{
+			if (precision == 0)
+				inst->out->v_zero_precision = true;
 			inst->out->v_precision = precision;
-			ft_printf_disable_flag('0');
+			if (precision != 0)
+				ft_printf_disable_flag('0');
 		}
 	}
 }

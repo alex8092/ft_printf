@@ -18,5 +18,8 @@ void	ft_printf_parse_longoctal(void)
 
 	if (!inst)
 		inst = ft_printf_instance();
+	if (inst->out->v_precision == 0 && inst->out->v_zero_precision && \
+		!ft_printf_has_flag('#'))
+		return ;
 	inst->out->addlo(inst->out, va_arg(inst->args, long int));
 }

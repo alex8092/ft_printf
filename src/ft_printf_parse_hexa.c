@@ -19,6 +19,13 @@ void	ft_printf_parse_hexa(void)
 
 	if (!inst)
 		inst = ft_printf_instance();
-	value = va_arg(inst->args, int);
+	if (inst->out->v_precision == 0 && inst->out->v_zero_precision)
+		return ;
+	if (inst->type_modifier == TYPE_MODIF_HH)
+		value = (unsigned char)va_arg(inst->args, int);
+	else if (inst->type_modifier == TYPE_MODIF_H)
+		value = (unsigned short)va_arg(inst->args, int);
+	else
+		value = va_arg(inst->args, int);
 	ft_printf_add_hexa(value, 0);
 }

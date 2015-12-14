@@ -18,6 +18,8 @@ void	ft_printf_parse_upperlhexa(void)
 
 	if (!inst)
 		inst = ft_printf_instance();
+	if (inst->out->v_precision == 0 && inst->out->v_zero_precision)
+		return ;
 	inst->out->v_upper = true;
 	ft_printf_add_hexa(va_arg(inst->args, long int), 1);
 }

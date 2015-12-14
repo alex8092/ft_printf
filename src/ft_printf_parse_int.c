@@ -18,5 +18,10 @@ void	ft_printf_parse_int(void)
 
 	if (!inst)
 		inst = ft_printf_instance();
-	ft_printf_add_number(va_arg(inst->args, int));
+	if (inst->type_modifier == TYPE_MODIF_HH)
+		ft_printf_add_number((char)va_arg(inst->args, int));
+	else if (inst->type_modifier == TYPE_MODIF_H)
+		ft_printf_add_number((short)va_arg(inst->args, int));
+	else
+		ft_printf_add_number(va_arg(inst->args, int));
 }

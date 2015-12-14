@@ -6,7 +6,7 @@
 #    By: amerle <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/28 07:07:14 by amerle            #+#    #+#              #
-#    Updated: 2015/01/28 07:09:38 by amerle           ###   ########.fr        #
+#    Updated: 2015/12/14 18:47:04 by amerle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ SRCS =	src/ft_printf.c \
 		src/ft_printf_get_size.c \
 		src/ft_printf_get_typemodifiers.c \
 		src/ft_printf_instance.c \
+		src/ft_printf_parse_char_nova.c \
 		src/ft_printf_next.c \
+		src/ft_printf_parse_percent.c \
 		src/ft_printf_parse_char.c \
 		src/ft_printf_parse_hexa.c \
 		src/ft_printf_parse_int.c \
@@ -64,13 +66,13 @@ SRCS =	src/ft_printf.c \
 		src/ft_printf_parse_wstring.c
 
 OBJS = $(SRCS:.c=.o)
-
+OBJS_FT = $(shell find libft -name "*.o")
 all: make_lib $(NAME)
 
 make_lib:
 	(cd libft && $(MAKE))
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(OBJS_FT)
 	$(LD) $(LDFLAGS) $@ $^
 	ranlib $@
 
