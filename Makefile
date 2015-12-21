@@ -6,14 +6,14 @@
 #    By: amerle <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/28 07:07:14 by amerle            #+#    #+#              #
-#    Updated: 2015/12/14 18:47:04 by amerle           ###   ########.fr        #
+#    Updated: 2015/12/21 11:14:34 by amerle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 LD = ar
 
-CFLAGS = -Wall -Wextra -Werror -g3 -Iinclude -Ilibft/include
+CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilibft/include
 
 LDFLAGS = rc
 
@@ -79,19 +79,20 @@ $(NAME): $(OBJS) $(OBJS_FT)
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
-clean:
+clean: clean_lib
 	rm -f $(OBJS)
 
 clean_lib:
-	(cd ../LibC && $(MAKE) clean)
+	(cd libft && $(MAKE) clean)
 
-fclean: clean
+fclean: clean fclean_lib
 	rm -f $(NAME)
+	rm -f test
 
 fclean_lib:
-	(cd ../LibC && $(MAKE) fclean)
+	(cd libft && $(MAKE) fclean)
 
-re: fclean all
+re: fclean fclean_lib all
 
 test: all tests/main.o
 	$(CC) -o $@ tests/main.o $(LDFLAGS_TEST)
